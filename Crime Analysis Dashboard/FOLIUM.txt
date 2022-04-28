@@ -1,0 +1,25 @@
+import folium
+us = folium.Map(location=[34.0522, -118.2437], zoom_start=9.5)
+
+folium.Choropleth(
+    geo_data= dataJson,
+    name="choropleth",
+    data=data,
+    columns=["PREC", "Count"],
+    key_on="feature.properties.PREC",
+    fill_color="YlGn",
+    fill_opacity=0.7,
+    line_opacity=.1,
+    legend_name="Total crime",
+    
+).add_to(us)
+folium.TileLayer('cartodbpositron').add_to(us)
+
+for i in df_divisions.index:
+    folium.Marker([df_divisions.loc[i,'Y'],df_divisions.loc[i,'X']],
+                 popup = df_divisions.loc[i,'DIVISION']
+                 ).add_to(us)
+    
+
+
+us
